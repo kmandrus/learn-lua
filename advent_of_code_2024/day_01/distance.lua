@@ -1,8 +1,10 @@
 require("io")
+require("math")
 require("string")
+require("table")
 
 
-print("running distance.lua")
+print("Advent of Code: Day 1, Part I")
 
 
 local function rows_from_file(file_path)
@@ -36,7 +38,33 @@ local function extract_column(rows, col_num)
   return column
 end
 
-local puzzle_input = "advent_of_code_2024/day_01/input.txt"
-local rows = rows_from_file(puzzle_input)
-first_column = extract_column(rows, 1)
-second_column = extract_column(rows, 2)
+
+local function prepare_list(file, col_num)
+  local rows = rows_from_file(file)
+  local list = extract_column(rows, col_num)
+  table.sort(list)
+  return list
+end
+
+
+local function compute_total_distance(first_list, second_list)
+  local sum = 0
+  for i=1, #first_list do
+    local d = math.abs(first_list[i] - second_list[i])
+    -- print("The distance between " .. first_list[i] .. " and " .. second_list[i] .. " is " .. d)
+    sum = sum + d
+  end
+  return sum
+end
+
+local function main()
+  local puzzle_input = "advent_of_code_2024/day_01/input.txt"
+  local first_list = prepare_list(puzzle_input, 1)
+  local second_list = prepare_list(puzzle_input, 2)
+  local sum = compute_total_distance(first_list, second_list)
+
+  print("The sum of the distances is " .. sum .. ".")
+end
+
+
+main()
