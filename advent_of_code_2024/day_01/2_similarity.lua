@@ -1,47 +1,13 @@
-require("io")
-require("math")
-require("string")
 require("table")
+local lib = require("advent_of_code_2024.aoc_lib")
 
 
 print("Advent of Code: Day 1, Part II")
 
 
-local function rows_from_file(file_path)
-  local file = io.open(file_path, "r")
-  local lines = {}
-  for line in file:lines() do
-    lines[#lines + 1] = line
-  end
-  file:close()
-  return lines
-end
-
-
-local function split(s)
-  -- split a string into a table of words
-  local words = {}
-  local i = 1
-  for word in string.gmatch(s, "%w+") do
-    words[i] = word
-    i = i + 1
-  end
-  return words
-end
-
-
-local function extract_column(rows, col_num)
-  local column = {}
-  for i, row in ipairs(rows) do
-    column[i] = split(row)[col_num]
-  end
-  return column
-end
-
-
 local function prepare_list(file, col_num)
-  local rows = rows_from_file(file)
-  local list = extract_column(rows, col_num)
+  local rows = lib.rows_from_file(file)
+  local list = lib.extract_column(rows, col_num)
   table.sort(list)
   return list
 end
@@ -58,6 +24,7 @@ local function count_occurrences(list)
   return count
 end
 
+
 local function compute_similarity(list, occurrences)
   local total_score = 0
   for _, num in pairs(list) do
@@ -65,6 +32,7 @@ local function compute_similarity(list, occurrences)
   end
   return total_score
 end
+
 
 local function main()
   local puzzle_input = "advent_of_code_2024/day_01/input.txt"
