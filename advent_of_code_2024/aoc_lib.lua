@@ -29,6 +29,7 @@ end
 
 
 function M.extract_column(rows, col_num)
+  -- assumes columns in the text file are space separated
   local column = {}
   for i, row in ipairs(rows) do
     column[i] = M.split(row)[col_num]
