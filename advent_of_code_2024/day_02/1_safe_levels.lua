@@ -55,7 +55,7 @@ end
 
 local function count_safe(reports)
   local count = 0
-  for i, report in ipairs(reports) do
+  for _, report in ipairs(reports) do
     if is_safe(report) then count = count + 1 end
   end
   return count
