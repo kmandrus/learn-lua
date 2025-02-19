@@ -37,4 +37,16 @@ function M.extract_column(rows, col_num)
   return column
 end
 
+
+function M.copy_table(t)
+  -- creates a shallow copy of a table
+  local copied_table = {}
+  for k, v in pairs(t) do
+    copied_table[k] = v
+  end
+  return copied_table
+end
+
+
+
 return M
